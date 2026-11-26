@@ -1,0 +1,88 @@
+# =============================================================================
+# .gitignore — Student Success Prediction (SAÉ 5.03)
+# Python, Jupyter Notebook, Machine Learning, Windows / macOS / Linux
+# =============================================================================
+
+# --- Environnements virtuels --------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# --- Python -------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+
+# --- Outils de test et de qualité --------------------------------------------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- Jupyter ------------------------------------------------------------------
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+*.orig.ipynb
+
+# --- Secrets et configuration locale -----------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.*
+credentials*.json
+.claude/settings.local.json
+
+# --- Données (jamais versionnées : redistribution non autorisée) ------------
+# Seuls les .gitkeep et le README de data/ sont versionnés.
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Dossier d'origine des ressources pédagogiques (CSV et PDF fournis sur Moodle)
+sujet/
+
+# --- Ressources pédagogiques (redistribution non autorisée à ce jour) --------
+docs/references/*
+!docs/references/README.md
+
+# --- Modèles entraînés et résultats temporaires ------------------------------
+models/*
+!models/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# Les figures et tableaux de reports/ sont versionnables APRÈS vérification
+# de leur contenu (aucune donnée individuelle, aucun identifiant étudiant).
+
+# --- Fichiers temporaires -----------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+~$*
+*.log
+
+# --- Systèmes d'exploitation -------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# --- IDE (configurations personnelles) ---------------------------------------
+.vscode/
+.idea/
+*.code-workspace

@@ -1,0 +1,29 @@
+# Student Success Prediction — SAÉ 5.03
+# Python >= 3.11 (exigé par pandas 3 et NumPy 2.4).
+#
+# Bornes : version minimale vérifiée lors de l'initialisation (novembre 2026),
+# borne supérieure à la prochaine version majeure pour éviter les ruptures d'API.
+# Toute bibliothèque supplémentaire doit être justifiée dans docs/decision_log.md.
+
+# --- Calcul et données --------------------------------------------------------
+numpy>=2.4,<3
+pandas>=3.0,<4
+scipy>=1.17,<2
+
+# --- Visualisation ------------------------------------------------------------
+matplotlib>=3.10,<4
+seaborn>=0.13.2,<0.14
+
+# --- Machine Learning ---------------------------------------------------------
+scikit-learn>=1.8,<2
+xgboost>=3.2,<4
+
+# --- Notebooks ----------------------------------------------------------------
+jupyterlab>=4.5,<5
+notebook>=7.5,<8
+ipykernel>=7.1,<8
+nbformat>=5.10,<6
+
+# --- Qualité ------------------------------------------------------------------
+pytest>=9.0,<10
+ruff>=0.17,<0.18
