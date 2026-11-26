@@ -26,6 +26,7 @@ formation, à partir des informations disponibles jusqu'à la fin du deuxième s
 - [Architecture du projet](#architecture-du-projet)
 - [Installation](#installation)
 - [Exécution du notebook](#exécution-du-notebook)
+- [Audit automatique de la qualité des données](#audit-automatique-de-la-qualité-des-données)
 - [Reproductibilité](#reproductibilité)
 - [Organisation collaborative](#organisation-collaborative)
 - [Avancement](#avancement)
@@ -125,6 +126,7 @@ Détails : [`docs/methodology.md`](docs/methodology.md).
 │   ├── SAE5_03_Data_Mining.ipynb   Livrable 1 — notebook final unique
 │   └── development/          Notebooks de travail par mission (non livrés)
 ├── src/                      Code réutilisable : config, chargement, audit, modèles…
+│   └── data_quality/         Système d'audit et de détection des anomalies (mission 1)
 ├── tests/                    Tests unitaires (pytest)
 ├── docs/                     Plan, méthodologie, dictionnaire, décisions, collaboration
 ├── reports/
@@ -186,6 +188,31 @@ python -m pytest
 python -m ruff check .
 ```
 
+## Audit automatique de la qualité des données
+
+Le paquet [`src/data_quality`](src/data_quality) audite le fichier brut et **signale** les
+anomalies (structure, valeurs manquantes, doublons, formats, domaine métier, cohérence entre
+variables, atypiques, redondances, fuite de données, déséquilibre des classes). Il ne corrige,
+n'impute et ne supprime rien.
+
+```powershell
+python -m src.data_quality                      # audit complet
+python -m src.data_quality --multivariate       # + Isolation Forest / LOF (facultatif)
+python -m src.data_quality --help               # toutes les options
+```
+
+```python
+from src.data_quality import run_audit, export_results
+result = run_audit()
+result.filter(min_severity="HIGH")
+export_results(result)
+```
+
+Sorties : `outputs/audit/` (détail par observation, non versionné) et
+[`reports/audit_qualite.md`](reports/audit_qualite.md) (rapport agrégé, sans identifiant).
+Documentation : [`docs/data_quality_audit.md`](docs/data_quality_audit.md) · catalogue des
+règles : [`docs/audit_rules_catalog.md`](docs/audit_rules_catalog.md).
+
 ## Reproductibilité
 
 - Graine aléatoire unique (`42`) définie dans [`src/config.py`](src/config.py).
@@ -209,7 +236,7 @@ Voir [`CONTRIBUTING.md`](CONTRIBUTING.md), [`docs/collaboration.md`](docs/collab
 | Mission | Statut |
 |---|---|
 | Initialisation du projet | Structure créée |
-| 1. Exploration et audit | À démarrer |
+| 1. Exploration et audit | En cours — système d'audit automatique implémenté et testé ; analyse et interprétation dans le notebook à réaliser |
 | 2. Prétraitement | À démarrer |
 | 3. Modélisation | À démarrer |
 | 4. Validation croisée et optimisation | À démarrer |

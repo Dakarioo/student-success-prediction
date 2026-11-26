@@ -83,3 +83,21 @@ d'évaluations sont des **entiers non négatifs** ; les relations entre variable
 - `age_inscription` ↔ `age_inscription_mois` : la seconde est simulée à partir de la première.
 - `note_diplome_anterieur` ↔ `niveau_dossier` : la seconde est dérivée de la première.
 - UE inscrites, créditées, validées, sans évaluation et nombre d'évaluations, pour chaque semestre.
+
+## Constats de l'audit automatique (mission 1)
+
+> Établis par `python -m src.data_quality` sur le fichier reçu (SHA-256 `707360BC…DFC2`). Détail :
+> [`reports/audit_qualite.md`](../reports/audit_qualite.md) ; règles :
+> [`audit_rules_catalog.md`](audit_rules_catalog.md). Aucune décision de traitement n'est prise ici.
+
+| Variable(s) | Cause de l'écart entre type lu et type métier, ou constat principal |
+|---|---|
+| `note_admission`, `note_diplome_anterieur`, `note_moyenne_s1` | Lues comme texte : virgules décimales (`120,0`) et/ou marqueurs `ND`, `?`, `Non renseigné` ; valeurs hors échelle (ex. 450, 999, −15, 25, 99) |
+| `note_moyenne_s2`, `age_inscription` | Lues comme texte : marqueurs `ND`, `?`, `Non renseigné` ; âges impossibles (−3, 0, 145, 220) |
+| `ue_inscrites_s1`, `nb_evaluations_s1`, `ue_validees_s2`, `age_inscription_mois` | Lues en flottant à cause de champs vides ; `nb_evaluations_s1` et `ue_inscrites_s2` contiennent des valeurs négatives et le code 999 |
+| Variables qualitatives et binaires | Variantes de casse, d'espaces et d'accents ; `YES` / `NO` dans les binaires ; valeurs déguisées `ND`, `?`, `Non renseigné` |
+| `id_etudiant` | 80 identifiants présents deux fois, tous en doublons exacts de ligne |
+| `version_export`, `code_campagne` | Constantes (`V1`, `2026`) |
+| `age_inscription_mois`, `niveau_dossier`, `note_admission_archive` | Redondances confirmées (dérivation exacte / corrélation 0,996 avec `note_admission`) |
+| `filiere` → `regime_cours` ; `taux_chomage` ↔ `indicateur_pib` → `taux_inflation` | Dépendances déterministes constatées |
+
