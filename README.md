@@ -212,6 +212,7 @@ Sorties : `outputs/audit/` (détail par observation, non versionné) et
 [`reports/audit_qualite.md`](reports/audit_qualite.md) (rapport agrégé, sans identifiant).
 Documentation : [`docs/data_quality_audit.md`](docs/data_quality_audit.md) · catalogue des
 règles : [`docs/audit_rules_catalog.md`](docs/audit_rules_catalog.md).
+Fonctionnement détaillé du code : [`docs/fonctionnement/`](docs/fonctionnement/).
 
 ## Reproductibilité
 
